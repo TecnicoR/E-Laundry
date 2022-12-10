@@ -14,14 +14,18 @@
     response.setHeader("cache-control","no-cache,no-store,must-revalidate"); //HTTP 1.1
     response.setHeader("Pragma","no-cache"); //HTTP 1.0
     response.setHeader("Expires","0"); //proxy
-
+    User user = new User();
+    User editUser = new User();
     if(session.getAttribute("activeUser") == null){
         response.sendRedirect("index.jsp");
     }
     else if(!((User) session.getAttribute("activeUser")).getRole().equals(Role.ADMIN)){
         response.sendRedirect("login.jsp");
     }
-    User user = (User) session.getAttribute("activeUser");
+    else{
+        user = (User) session.getAttribute("activeUser");
+        editUser =
+    }
 %>
 <body style="background-color: white">
     <div class="nav">
@@ -32,11 +36,11 @@
     </div>
     <div class="main">
     <div class="form" style="background-color: blue; color: white">
-        <h2 style="border-bottom-color: white; font-weight: lighter ">Create new admin</h2>
+        <h2 style="border-bottom-color: white; font-weight: lighter ">Edit User</h2>
         <form action="create-admin" method="post">
             <div class="form-group">
                 <label for="name">Name</label>
-                <input type="text" name="name" id="name">
+                <input type="text" name="name" id="name" value="">
             </div>
             <div class="form-group">
                 <label for="email">Email</label>

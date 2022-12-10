@@ -74,7 +74,8 @@ public class OrderDao {
         try {
             ps = db.prepareStatement(UPDATE_STATUS_BY_ID.getValue());
             ps.setString(1, OrderStatus.DONE.toString());
-            ps.setInt(2, orderId);
+            ps.setString(2, LocalDate.now().toString());
+            ps.setInt(3, orderId);
             int i = ps.executeUpdate();
             if (i > 0) {
                 return true;

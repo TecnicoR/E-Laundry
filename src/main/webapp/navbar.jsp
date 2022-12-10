@@ -10,14 +10,15 @@
     <title>Document</title>
 </head>
 <%
+    String userRole = Role.USER.toString();
+    String userName = "";
     if(session.getAttribute("activeUser") == null){
         response.sendRedirect("login.jsp");
     }
-    else if(!((User) session.getAttribute("activeUser")).getRole().equals(Role.ADMIN)){
-        response.sendRedirect("login.jsp");
+    else {
+        userName = request.getParameter("userName");
+        userRole = request.getParameter("userRole");
     }
-    String userName = request.getParameter("userName");
-    String userRole = request.getParameter("userRole");
 %>
 
 <body>

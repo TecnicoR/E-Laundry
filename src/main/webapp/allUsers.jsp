@@ -19,16 +19,20 @@
     response.setHeader("cache-control","no-cache,no-store,must-revalidate"); //HTTP 1.1
     response.setHeader("Pragma","no-cache"); //HTTP 1.0
     response.setHeader("Expires","0"); //proxy
-
+    User user = new User();
+    user.setRole(Role.USER);
+    List<User> users = new ArrayList<>();
     if(session.getAttribute("activeUser") == null){
-        response.sendRedirect("login.jsp");
+        response.sendRedirect("index.jsp");
     }
     else if(!((User) session.getAttribute("activeUser")).getRole().equals(Role.ADMIN)){
-        response.sendRedirect("login.jsp");
+        response.sendRedirect("index.jsp");
     }
-    User user = (User) session.getAttribute("activeUser");
-    final UserService userService = new UserService();
-    List<User> users = userService.getAll();
+    else{
+        user = (User) session.getAttribute("activeUser");
+        final UserService userService = new UserService();
+        users = userService.getAll();
+    }
 
 %>
 <body>

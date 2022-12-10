@@ -3,6 +3,8 @@
 <%@ page import="com.elaundry.entity.RateCard" %>
 <%@ page import="java.util.List" %>
 <%@ page import="java.util.Map" %>
+<%@ page import="java.util.HashMap" %>
+<%@ page import="com.elaundry.enums.Role" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -17,13 +19,17 @@
     response.setHeader("cache-control","no-cache,no-store,must-revalidate"); //HTTP 1.1
     response.setHeader("Pragma","no-cache"); //HTTP 1.0
     response.setHeader("Expires","0"); //proxy
-
+    Map<String, Integer> price = new HashMap<>();
+    User user = new User();
+    user.setRole(Role.USER);
     if(session.getAttribute("activeUser") == null){
-        response.sendRedirect("login.jsp");
+        response.sendRedirect("index.jsp");
     }
-    User user = (User) session.getAttribute("activeUser");
-    final RateCardService rateCardService = new RateCardService();
-    Map<String, Integer> price = rateCardService.getAll();
+   else{
+        user = (User) session.getAttribute("activeUser");
+        final RateCardService rateCardService = new RateCardService();
+        price = rateCardService.getAll();
+    }
 %>
 <body style="background-color: white">
     <div class="nav">

@@ -14,7 +14,7 @@ public enum SqlQuery {
     GET_ALL_ORDERS_BY_USER_ID("select * from user_order where user_id = ?"),
     GET_ALL_RATE_CARDS("select * from rate_card"),
 
-    UPDATE_STATUS_BY_ID("update user_order set status = ? where id = ?");
+    UPDATE_STATUS_BY_ID("update user_order set status = ?, complete_date = ? where id = ?");
 
 
     private final String value;

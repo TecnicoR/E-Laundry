@@ -21,16 +21,20 @@
     response.setHeader("Pragma","no-cache"); //HTTP 1.0
     response.setHeader("Expires","0"); //proxy
 
-    if(session.getAttribute("activeUser") == null){
-        response.sendRedirect("login.jsp");
-    }
-    User user = (User) session.getAttribute("activeUser");
-    final OrderService orderService = new OrderService();
+    User user = new User();
+    user.setRole(Role.USER);
     List<Order> orders = new ArrayList<>();
-    if(user.getRole().equals(Role.USER)){
-        orders = orderService.getAll(user.getId());
-    }else{
-        orders = orderService.getAll();
+    if(session.getAttribute("activeUser") == null){
+        response.sendRedirect("index.jsp");
+    }
+    else{
+        user = (User) session.getAttribute("activeUser");
+        final OrderService orderService = new OrderService();
+        if(user.getRole().equals(Role.USER)){
+            orders = orderService.getAll(user.getId());
+        }else{
+            orders = orderService.getAll();
+        }
     }
 %>
 <body>
@@ -81,7 +85,7 @@
                                     out.print("<td><a href='complete-order?orderId=" + order.getId() + "'>complete</a></td>");
                                 }
                                 else{
-                                    out.print("-------");
+                                    out.print("<td>--------</td>");
                                 }
                             }
                         %>
