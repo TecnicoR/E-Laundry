@@ -12,7 +12,9 @@ public enum SqlQuery {
     CREATE_NEW_ORDER("insert into user_order (user_id, user_name, items, price, order_date, complete_date, status) values(?,?,?,?,?,?,?)"),
     GET_ALL_ORDERS("select * from user_order"),
     GET_ALL_ORDERS_BY_USER_ID("select * from user_order where user_id = ?"),
-    GET_ALL_RATE_CARDS("select * from rate_card");
+    GET_ALL_RATE_CARDS("select * from rate_card"),
+
+    UPDATE_STATUS_BY_ID("update user_order set status = ? where id = ?");
 
 
     private final String value;

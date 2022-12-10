@@ -70,6 +70,21 @@ public class OrderDao {
         return null;
     }
 
+    public boolean updateStatusById(Integer orderId) {
+        try {
+            ps = db.prepareStatement(UPDATE_STATUS_BY_ID.getValue());
+            ps.setString(1, OrderStatus.DONE.toString());
+            ps.setInt(2, orderId);
+            int i = ps.executeUpdate();
+            if (i > 0) {
+                return true;
+            }
+        } catch (SQLException e) {
+            System.out.println("Error - " + e.getMessage());
+        }
+        return false;
+    }
+
     private Order getOrderFromResultSet(ResultSet resultSet) throws SQLException {
         Order order = new Order();
         order.setId(resultSet.getInt("id"));

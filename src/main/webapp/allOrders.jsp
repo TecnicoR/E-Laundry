@@ -5,6 +5,7 @@
 <%@ page import="com.elaundry.entity.Order" %>
 <%@ page import="java.util.List" %>
 <%@ page import="java.util.ArrayList" %>
+<%@ page import="com.elaundry.enums.OrderStatus" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -54,7 +55,11 @@
                         <th>Date of order</th>
                         <th>Date of completion</th>
                         <th>status</th>
-                        <th colspan="2">Action</th>
+                        <%
+                            if(user.getRole().equals(Role.ADMIN)){
+                                out.print("<th>Action</th>");
+                            }
+                        %>
                     </tr>
                 </thead>
                 <tbody>
@@ -70,8 +75,17 @@
                         <td><%=order.getOrderDate()%></td>
                         <td><%=order.getCompletionDate()%></td>
                         <td><%=order.getStatus()%></td>
-                        <td><a href="#">delete</a></td>
-                        <td><a href="#">edit</a></td>
+                        <%
+                            if(user.getRole().equals(Role.ADMIN)){
+                                if(order.getStatus().equals(OrderStatus.WORK_IN_PROGRESS)) {
+                                    out.print("<td><a href='complete-order?orderId=" + order.getId() + "'>complete</a></td>");
+                                }
+                                else{
+                                    out.print("-------");
+                                }
+                            }
+                        %>
+
                     </tr>
                 <%}%>
                 </tbody>

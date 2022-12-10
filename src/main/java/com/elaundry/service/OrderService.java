@@ -23,4 +23,9 @@ public class OrderService {
     public Order createOrder(Order order) {
         return orderDao.save(order);
     }
+
+    public boolean updateStatus(Integer orderId){
+        return orderDao.updateStatusById(orderId);
+    }
+
 }
