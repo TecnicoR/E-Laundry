@@ -1,7 +1,6 @@
 package com.elaundry.dao;
 
 import com.elaundry.entity.RateCard;
-import com.elaundry.entity.User;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -10,8 +9,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.elaundry.enums.SqlQuery.GET_ALL_RATE_CARDS;
-import static com.elaundry.enums.SqlQuery.GET_ALL_USERS;
+import static com.elaundry.enums.SqlQuery.*;
 
 public class RateCardDao {
     private final Connection db;
@@ -35,6 +33,46 @@ public class RateCardDao {
         return rateCards;
     }
 
+    public RateCard findByName(String name){
+        try{
+            ps = db.prepareStatement(FIND_RATE_CARD_BY_NAME.getValue());
+            ps.setString(1, name);
+            ResultSet resultSet = ps.executeQuery();
+            if(resultSet.next())
+                return getRateCardFromResultSet(resultSet);
+        } catch (SQLException e) {
+            System.out.println("Error - " + e.getMessage());
+        }
+        return null;
+    }
+
+    public RateCard updatePriceById(Integer id, Integer price){
+        try{
+            ps = db.prepareStatement(UPDATE_RATE_CARD_PRICE.getValue());
+            ps.setInt(1, price);
+            ps.setInt(2, id);
+            int i = ps.executeUpdate();
+            if(i>0)
+                return findById(id);
+        } catch (SQLException e) {
+            System.out.println("Error - " + e.getMessage());
+        }
+        return null;
+    }
+
+    public RateCard findById(Integer id){
+        try{
+            ps = db.prepareStatement(FIND_RATE_CARD_BY_ID.getValue());
+            ps.setInt(1, id);
+            ResultSet resultSet = ps.executeQuery();
+            if(resultSet.next()){
+                return getRateCardFromResultSet(resultSet);
+            }
+        } catch (SQLException e) {
+            System.out.println("Error - " + e.getMessage());
+        }
+        return null;
+    }
     private RateCard getRateCardFromResultSet(ResultSet resultSet) throws SQLException {
         RateCard rateCard = new RateCard();
         rateCard.setId(resultSet.getInt("id"));
@@ -42,4 +80,6 @@ public class RateCardDao {
         rateCard.setPrice(resultSet.getInt("price"));
         return rateCard;
     }
+
+
 }

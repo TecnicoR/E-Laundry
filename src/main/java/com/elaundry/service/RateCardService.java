@@ -1,6 +1,7 @@
 package com.elaundry.service;
 
 import com.elaundry.dao.RateCardDao;
+import com.elaundry.entity.RateCard;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -18,5 +19,13 @@ public class RateCardService {
             price.put(rateCard.getItemName(), rateCard.getPrice());
         });
         return price;
+    }
+
+    public RateCard getByName(String name){
+        return rateCardDao.findByName(name);
+    }
+
+    public RateCard updatePriceById(Integer id, Integer price){
+        return rateCardDao.updatePriceById(id, price);
     }
 }

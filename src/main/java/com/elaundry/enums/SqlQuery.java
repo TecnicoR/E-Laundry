@@ -16,6 +16,12 @@ public enum SqlQuery {
     GET_ALL_ORDERS_BY_USER_ID("select * from user_order where user_id = ?"),
     GET_ALL_RATE_CARDS("select * from rate_card"),
 
+    FIND_RATE_CARD_BY_NAME("select * from rate_card where item_name = ?"),
+
+    UPDATE_RATE_CARD_PRICE("update rate_card set price = ? where id = ?"),
+
+    FIND_RATE_CARD_BY_ID("select * from rate_card where id = ?"),
+
     UPDATE_STATUS_BY_ID("update user_order set status = ?, complete_date = ? where id = ?");
 
 

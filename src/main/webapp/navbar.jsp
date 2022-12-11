@@ -32,6 +32,7 @@
                 }
                 else{
                     out.print("<li><a href='./allUsers.jsp'>Users</a></li>");
+                    out.print("<li><a href='./allPrices.jsp'>Rate Chart</a></li>");
                 }
             %>
             <li><a href="./allOrders.jsp">All orders</a></li>

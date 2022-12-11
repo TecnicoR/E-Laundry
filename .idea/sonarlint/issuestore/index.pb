@@ -21,14 +21,8 @@ u
 Esrc/main/java/com/elaundry/controllers/user/DeleteUserController.java,9\6\96f852f4dcf5c952677d2d4dbcdb11c5a3d3e1bd
 t
 Dsrc/main/java/com/elaundry/controllers/user/UserLoginController.java,a\5\a5e8fa364dfe850198bfe151ab2c46912191ae5d
-_
-/src/main/java/com/elaundry/entity/RateCard.java,5\9\59b7d635ead11f05020c739483277de820a4402f
-_
-/src/main/java/com/elaundry/dao/RateCardDao.java,f\4\f4c9631daea28a022eb9f41d9240794eaa6bbd6d
 w
 Gsrc/main/java/com/elaundry/controllers/order/CreateOrderController.java,6\d\6d11f48baf4245fc21fddc535ab9cac37448f4a5
-g
-7src/main/java/com/elaundry/service/RateCardService.java,9\b\9b9d469413be0bc9f545dcdb095381da3e4b69d8
 H
 src/main/webapp/home.css,8\8\88b35fe3d4ad41f14def8db84b7a2305a228bcc0
 d
