@@ -12,15 +12,21 @@
 <body>
     <div class="main">
     <div class="form">
+        <%
+            if(session.getAttribute("message")!=null){
+                out.print("<h6 style='text-align: center; margin: 6px; font-size: 20px; color: darkviolet'>"+session.getAttribute("message")+"</h6>");
+                session.removeAttribute("message");
+            }
+        %>
         <h2>Welcome back! Login</h2>
         <form action="login" method="post">
             <div class="form-group">
                 <label for="email">Email</label>
-                <input type="email" name="email" id="email">
+                <input type="email" name="email" id="email" required autofocus>
             </div>
             <div class="form-group">
                 <label for="password">Password</label>
-                <input type="password" name="password" id="password">
+                <input type="password" name="password" id="password" required>
             </div>
             <div class="btns">
                 <input type="submit" name="submit" id="submit">

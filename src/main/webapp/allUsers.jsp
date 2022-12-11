@@ -42,7 +42,12 @@
             <jsp:param name="userRole" value="<%=user.getRole().toString()%>"/>
         </jsp:include>
     </div>
-
+    <%
+        if(session.getAttribute("message")!=null){
+            out.print("<h6 style='text-align: center; margin-top: 20px; font-size: 20px; color: darkviolet'>"+session.getAttribute("message")+"</h6>");
+            session.removeAttribute("message");
+        }
+    %>
     <div class="mainHome">
       <div style="display:flex; justify-content: space-around;">
         <h1>All Users</h1>
@@ -73,8 +78,17 @@
                         <td><%=u.getEmail()%></td>
                         <td><%=u.getAddress()%></td>
                         <td><%=u.getRole()%></td>
-                        <td><a>edit</a></td>
-                        <td><a href="delete-user?userId=<%=u.getId()%>">delete</a></td>
+                        <%
+                            if(u.getEmail().equals("admin@gmail.com")){
+                                out.print("<td>---</td>");
+                                out.print("<td>---</td>");
+                            }
+                            else{
+                                out.print("<td><a href='editUser.jsp?editUserId="+u.getId()+"'>edit</a></td>");
+                                out.print("<td><a href='delete-user?userId="+u.getId()+"'>delete</a></td>");
+                            }
+                        %>
+
                     </tr>
                 <%}%>
                 </tbody>

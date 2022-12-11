@@ -41,6 +41,12 @@
     
     <div class="main">
         <div class="place">
+            <%
+                if(session.getAttribute("message")!=null){
+                    out.print("<h6 style='text-align: center; margin: 6px; font-size: 20px; color: darkviolet'>"+session.getAttribute("message")+"</h6>");
+                    session.removeAttribute("message");
+                }
+            %>
             <h1>Place Order</h1>
             <form action="create-order" method="post">
                 <div class="cart" id="cart">

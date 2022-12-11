@@ -44,7 +44,12 @@
             <jsp:param name="userRole" value="<%=user.getRole().toString()%>"/>
         </jsp:include>
     </div>
-
+    <%
+        if(session.getAttribute("message")!=null){
+            out.print("<h6 style='text-align: center; margin-top: 20px; font-size: 20px; color: darkviolet'>"+session.getAttribute("message")+"</h6>");
+            session.removeAttribute("message");
+        }
+    %>
     <div class="mainHome">
         <h1>All Orders</h1>
         <div class="content">

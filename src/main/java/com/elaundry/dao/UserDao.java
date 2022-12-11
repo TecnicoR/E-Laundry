@@ -62,6 +62,7 @@ public class UserDao {
         } catch (SQLException e) {
             System.out.println("Error - " + e.getMessage());
         }
+
         return users;
     }
 
@@ -79,6 +80,23 @@ public class UserDao {
         return null;
     }
 
+    public User updateUser(User user){
+        try{
+            ps = db.prepareStatement(UPDATE_USER.getValue());
+            ps.setString(1, user.getName());
+            ps.setString(2, user.getEmail());
+            ps.setString(3, user.getPassword());
+            ps.setString(4, user.getAddress());
+            ps.setInt(5, user.getId());
+            int i = ps.executeUpdate();
+            if(i>0){
+                return findByEmail(user.getEmail());
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return null;
+    }
     public boolean deleteById(Integer id) {
         try {
             ps = db.prepareStatement(DELETE_USER_BY_ID.getValue());

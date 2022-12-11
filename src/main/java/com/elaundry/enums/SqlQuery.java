@@ -9,6 +9,8 @@ public enum SqlQuery {
 
     DELETE_USER_BY_ID("delete from laundry_user where id = ?"),
 
+    UPDATE_USER("update laundry_user set name=?, email=?, password=?, address=? where id = ?"),
+
     CREATE_NEW_ORDER("insert into user_order (user_id, user_name, items, price, order_date, complete_date, status) values(?,?,?,?,?,?,?)"),
     GET_ALL_ORDERS("select * from user_order"),
     GET_ALL_ORDERS_BY_USER_ID("select * from user_order where user_id = ?"),

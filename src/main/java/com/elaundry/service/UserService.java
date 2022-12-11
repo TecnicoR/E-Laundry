@@ -43,4 +43,9 @@ public class UserService {
         return userDao.deleteById(id);
     }
 
+    public User updateUserById(Integer id, User user){
+        user.setId(id);
+        return userDao.updateUser(user);
+    }
+
 }

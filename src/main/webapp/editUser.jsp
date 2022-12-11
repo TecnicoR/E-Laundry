@@ -1,5 +1,6 @@
 <%@ page import="com.elaundry.entity.User" %>
 <%@ page import="com.elaundry.enums.Role" %>
+<%@ page import="com.elaundry.service.UserService" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -15,6 +16,7 @@
     response.setHeader("Pragma","no-cache"); //HTTP 1.0
     response.setHeader("Expires","0"); //proxy
     User user = new User();
+    user.setRole(Role.USER);
     User editUser = new User();
     if(session.getAttribute("activeUser") == null){
         response.sendRedirect("index.jsp");
@@ -24,7 +26,7 @@
     }
     else{
         user = (User) session.getAttribute("activeUser");
-        editUser =
+        editUser = new UserService().getById(Integer.parseInt(request.getParameter("editUserId")));
     }
 %>
 <body style="background-color: white">
@@ -37,18 +39,19 @@
     <div class="main">
     <div class="form" style="background-color: blue; color: white">
         <h2 style="border-bottom-color: white; font-weight: lighter ">Edit User</h2>
-        <form action="create-admin" method="post">
+        <form action="edit-user" method="post">
+            <input type="hidden" name="id" value="<%=editUser.getId()%>">
             <div class="form-group">
                 <label for="name">Name</label>
-                <input type="text" name="name" id="name" value="">
+                <input type="text" name="name" id="name" value="<%=editUser.getName()%>">
             </div>
             <div class="form-group">
                 <label for="email">Email</label>
-                <input type="email" name="email" id="email">
+                <input type="email" name="email" id="email" value="<%=editUser.getEmail()%>">
             </div>
             <div class="form-group">
                 <label for="password">Password</label>
-                <input type="password" name="password" id="password">
+                <input type="password" name="password" id="password" placeholder="enter password to change password or blank">
             </div>
             <div class="form-group">
                 <label for="confirmPassword">Confirm Password</label>
@@ -56,9 +59,9 @@
             </div>
             <div class="form-group">
                 <label for="address">Address</label>
-                <input type="text" name="address" id="address"></input>
+                <input type="text" name="address" id="address" value="<%=editUser.getAddress()%>">
             </div>
-            <input style="background-color: white" type="submit" name="submit" id="submit">
+            <input style="background-color: white; color: blue" type="submit" name="submit" id="submit" >
 
             
         </form>

@@ -35,7 +35,7 @@
                 }
             %>
             <li><a href="./allOrders.jsp">All orders</a></li>
-            <li><a href="#"><%=userName%></a></li>
+            <li><a href="myProfileEdit.jsp"><%=userName%></a></li>
             <li><a href="logout">logout</a></li>
         </ul>
     </nav>
