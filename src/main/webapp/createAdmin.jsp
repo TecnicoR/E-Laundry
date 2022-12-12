@@ -32,6 +32,12 @@
     </div>
     <div class="main">
     <div class="form" style="background-color: blue; color: white">
+        <%
+            if(session.getAttribute("message")!=null){
+                out.print("<h6 style='text-align: center; font-size: 20px; color: yellow; margin-top: 8px'>"+session.getAttribute("message")+"</h6>");
+                session.removeAttribute("message");
+            }
+        %>
         <h2 style="border-bottom-color: white; font-weight: lighter ">Create new admin</h2>
         <form action="create-admin" method="post">
             <div class="form-group">
@@ -54,7 +60,7 @@
                 <label for="address">Address</label>
                 <input type="text" name="address" id="address" required></input>
             </div>
-            <input style="background-color: white" type="submit" name="submit" id="submit">
+            <input style="background-color: white; color: white" type="submit" name="submit" id="submit">
 
             
         </form>

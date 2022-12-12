@@ -30,12 +30,18 @@ public class UserSignupController extends HttpServlet {
         user.setAddress(req.getParameter("address"));
         user.setRole(Role.USER);
         HttpSession session = req.getSession();
-        User user1 = userService.createUser(user);
-        session.setAttribute("activeUser", user1);
-        if(user1.getRole().equals(Role.USER)){
-            resp.sendRedirect("allOrders.jsp");
+        if(userService.getByEmail(user.getEmail()) != null){
+            session.setAttribute("message", "Email already exists !");
+            resp.sendRedirect("signup.jsp");
         }
-        System.out.println("Signup success");
-        session.setAttribute("message", "Sign Up Successful");
+        else{
+            User user1 = userService.createUser(user);
+            session.setAttribute("activeUser", user1);
+            if(user1.getRole().equals(Role.USER)){
+                resp.sendRedirect("allOrders.jsp");
+            }
+            System.out.println("Signup success");
+            session.setAttribute("message", "Sign Up Successful");
+        }
     }
 }

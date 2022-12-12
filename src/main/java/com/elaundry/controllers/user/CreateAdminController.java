@@ -31,9 +31,15 @@ public class CreateAdminController extends HttpServlet {
         user.setRole(Role.ADMIN);
         User user1 = userService.createUser(user);
         HttpSession session = req.getSession();
-        session.setAttribute("message", "Admin created successfully");
-        if(user1.getRole().equals(Role.ADMIN)){
-            resp.sendRedirect("allUsers.jsp");
+        if(userService.getByEmail(user.getEmail()) != null){
+            session.setAttribute("message", "Email already exists !");
+            resp.sendRedirect("createAdmin.jsp");
+        }
+        else{
+            session.setAttribute("message", "Admin created successfully");
+            if(user1.getRole().equals(Role.ADMIN)){
+                resp.sendRedirect("allUsers.jsp");
+            }
         }
     }
 }

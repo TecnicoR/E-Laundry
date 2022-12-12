@@ -10,7 +10,7 @@ public class GetConnection {
             return DriverManager.getConnection(
                     "jdbc:mysql://localhost:3306/elaundry",
                     "root",
-                    "system");
+                    "Rabi@Work4");
         } catch (Exception e) {
             e.printStackTrace();
             return null;
